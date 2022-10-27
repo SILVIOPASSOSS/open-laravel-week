@@ -26,16 +26,6 @@ jobs:
           npm install
           npm run build
 
-      - name: Generate deployment artifact
-        run: tar -czf ${{ github.sha }}.tar.gz --exclude=*.git --exclude=node_modules --exclude=tests --exclude=storage *
-      
-      - name: Store artifact
-        run: actions/upload-artifact@v2
-        with:
-          name: app-build 
-          path: ${{ github.sha }}.tar.gz
-          retention-days: 1
-
   prepare-release-on-server:
     name: Prepare release on server
     runs-on: ubuntu-latest
